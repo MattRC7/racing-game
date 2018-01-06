@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3eb2d0e6ff22364cb7eb00264c798bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 760
+  thrust: 800
   spin: 240
 --- !u!114 &686265152
 MonoBehaviour:

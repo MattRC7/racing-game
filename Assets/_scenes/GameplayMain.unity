@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79b0ddd0fc2bb4b62928b003d358eb82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  next: {fileID: 982908782}
+  next: {fileID: 982908786}
 --- !u!54 &532622156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -878,26 +878,15 @@ GameObject:
   - component: {fileID: 982908785}
   - component: {fileID: 982908784}
   - component: {fileID: 982908783}
-  - component: {fileID: 982908782}
+  - component: {fileID: 982908786}
+  - component: {fileID: 982908787}
   m_Layer: 0
-  m_Name: Checkpoint
+  m_Name: Checkpoint_End
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &982908782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 982908781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d277fc23b01024f43bf11f077888c397, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  credit_reward: 5
 --- !u!54 &982908783
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -940,6 +929,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &982908786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982908781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b0ddd0fc2bb4b62928b003d358eb82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  next: {fileID: 0}
+--- !u!114 &982908787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982908781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6ed2bc73726498d9d761f53ec62155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  credit_reward: 5
 --- !u!1 &1003666000
 GameObject:
   m_ObjectHideFlags: 0

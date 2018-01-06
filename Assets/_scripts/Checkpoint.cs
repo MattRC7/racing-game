@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
 
-	public Checkpoint_Goal next;
+	public Checkpoint next;
+	private Mission_Reward reward;
 
 	// Use this for initialization
 	void Start () {
-		
+		reward = GetComponent<Mission_Reward>();
 	}
 	
 	// Update is called once per frame
@@ -17,8 +18,14 @@ public class Checkpoint : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		if (other.GetComponent<Player>()) {
-			next.gameObject.SetActive(true);
+		Player player = other.GetComponent<Player>();
+		if (player) {
+			if (next) {
+				next.gameObject.SetActive(true);
+			}
+			if (reward) {
+				reward.giveReward(player);
+			}
 			Destroy(gameObject);
 		}
 	}

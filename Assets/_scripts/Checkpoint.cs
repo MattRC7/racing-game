@@ -26,7 +26,7 @@ public class Checkpoint : MonoBehaviour {
 			if (reward) {
 				reward.giveReward(player);
 			}
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }

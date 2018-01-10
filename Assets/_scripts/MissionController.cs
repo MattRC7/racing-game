@@ -11,7 +11,11 @@ public class MissionController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		starting_checkpoints[Random.Range(0,starting_checkpoints.Length)].gameObject.SetActive(true);
+		for (int i=0; i < starting_checkpoints.Length; i++) {
+			MissionCompleter new_completer = starting_checkpoints[i].last().gameObject.AddComponent<MissionCompleter>();
+			new_completer.controller = this;
+		}
+		activateMission();
 	}
 	
 	// Update is called once per frame

@@ -8,6 +8,10 @@ public class Checkpoint : MonoBehaviour {
 	private Mission_Reward reward;
 	private MissionCompleter completer;
 
+	public Checkpoint last () {
+		return next ? next.last() : this;
+	}
+
 	// Use this for initialization
 	void Start () {
 		reward = GetComponent<Mission_Reward>();

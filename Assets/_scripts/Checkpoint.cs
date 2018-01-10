@@ -6,10 +6,12 @@ public class Checkpoint : MonoBehaviour {
 
 	public Checkpoint next;
 	private Mission_Reward reward;
+	private MissionCompleter completer;
 
 	// Use this for initialization
 	void Start () {
 		reward = GetComponent<Mission_Reward>();
+		completer = GetComponent<MissionCompleter>();
 	}
 	
 	// Update is called once per frame
@@ -25,6 +27,9 @@ public class Checkpoint : MonoBehaviour {
 			}
 			if (reward) {
 				reward.giveReward(player);
+			}
+			if (completer) {
+				completer.missionComplete();
 			}
 			gameObject.SetActive(false);
 		}

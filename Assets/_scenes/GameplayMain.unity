@@ -307,7 +307,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 482199294}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -647.5, y: 338.5, z: 0}
+  m_LocalPosition: {x: -647.5, y: 309.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1611007811}
@@ -412,11 +412,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -11.6
+      value: -18.7
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 20.9
+      value: 9.8
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_RootOrder
@@ -529,7 +529,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 686265150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0.41, y: 1, z: -43.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2026507968}
@@ -560,7 +560,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 737773395}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 647.5, y: 338.5, z: 0}
+  m_LocalPosition: {x: 647.5, y: 309.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1611007811}
@@ -1088,7 +1088,7 @@ GameObject:
   - component: {fileID: 1268671316}
   - component: {fileID: 1268671314}
   - component: {fileID: 1268671313}
-  - component: {fileID: 1268671318}
+  - component: {fileID: 1268671315}
   m_Layer: 0
   m_Name: RaceCam
   m_TagString: MainCamera
@@ -1110,6 +1110,20 @@ Behaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1268671312}
   m_Enabled: 1
+--- !u!114 &1268671315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1268671312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12e2664f40bb24b39bc8a688cfd4a7a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 686265150}
+  height: 3
+  back: 8
 --- !u!20 &1268671316
 Camera:
   m_ObjectHideFlags: 0
@@ -1152,29 +1166,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1268671312}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: -10}
+  m_LocalPosition: {x: 0.42, y: 3, z: -49.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1268671318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1268671312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4677e3778d0253a488ab9276e751023d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 686265150}
-  height: 2
-  back: 6
-  max_wrap: 10
-  max_slide: 0.3
-  cam_speed: 10
 --- !u!1001 &1332778341
 Prefab:
   m_ObjectHideFlags: 0
@@ -1455,7 +1452,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1611007807}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 657.5, y: 348.5, z: 0}
+  m_LocalPosition: {x: 657.5, y: 319.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482199295}

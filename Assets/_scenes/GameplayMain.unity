@@ -121,11 +121,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 19.7
+      value: 45.6
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -10.6
+      value: -2.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
@@ -412,11 +412,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -18.7
+      value: -40.09
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 9.8
+      value: -43.01
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_RootOrder
@@ -1122,8 +1122,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 686265150}
-  height: 3
-  back: 8
+  height: 4
+  back: 6
+  forward: 10
 --- !u!20 &1268671316
 Camera:
   m_ObjectHideFlags: 0

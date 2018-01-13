@@ -6,6 +6,7 @@ public class PlayerRaceCamController : MonoBehaviour {
 	public GameObject target;
 	public float height;
 	public float back;
+	public float forward;
 
 	// Use this for initialization
 	void Start () {
@@ -14,14 +15,14 @@ public class PlayerRaceCamController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
-		transform.position = cameraPosition(height, back);
+		transform.position = cameraPosition();
 		transform.rotation = cameraRotation();
 	}
 	
 	Vector3 lookDirection () {
-		return target.transform.forward;
+		return target.transform.position + target.transform.forward*forward - cameraPosition();
 	}
-	Vector3 cameraPosition (float up, float back) {
+	Vector3 cameraPosition () {
 		return target.transform.position - target.transform.forward*back + target.transform.up*height;
 	}
 	Quaternion cameraRotation () {

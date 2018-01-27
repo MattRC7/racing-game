@@ -482,8 +482,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3eb2d0e6ff22364cb7eb00264c798bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 800
-  spin: 240
+  thrust: 1000
+  spin: 480
+  grip: 20
 --- !u!114 &686265152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,8 +528,8 @@ Rigidbody:
   m_GameObject: {fileID: 686265150}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.7
-  m_AngularDrag: 0.4
+  m_Drag: 0.3
+  m_AngularDrag: 0.2
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0

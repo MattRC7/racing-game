@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public float thrust;
 	public float spin;
 	public float grip;
+	public float handling;
 
 	private Rigidbody rb;
 
@@ -29,13 +30,20 @@ public class PlayerController : MonoBehaviour {
 
 	void AddTurnTorque () {
 		float turn = Input.GetAxis("Horizontal");
-		rb.AddTorque(transform.up * turn * spin * Time.deltaTime);
+		if (Mathf.Abs(turn) > 0.2) {
+			rb.AddTorque(transform.up * turn * spin * Time.deltaTime);
+		}
+		else {
+			Vector3 angular_lateral_velocity = Vector3.Project(rb.angularVelocity, transform.up);
+			float angular_friction = Mathf.Min(angular_lateral_velocity.magnitude * Mathf.Rad2Deg, handling * Time.deltaTime);
+			rb.AddTorque(-angular_lateral_velocity.normalized * angular_friction);
+		}
 	}
 
 	void AddLateralFriction() {
 		Vector3 lateral_velocity = this.LateralVelocity();
 		float friction = Mathf.Min(lateral_velocity.magnitude, grip * Time.deltaTime);
-		rb.AddForce(-lateral_velocity * friction);
+		rb.AddForce(-lateral_velocity.normalized * friction);
 	}
 
 	Vector3 LateralVelocity () {

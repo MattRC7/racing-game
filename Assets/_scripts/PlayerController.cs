@@ -30,11 +30,12 @@ public class PlayerController : MonoBehaviour {
 
 	void AddTurnTorque () {
 		float turn = Input.GetAxis("Horizontal");
-		if (Mathf.Abs(turn) > 0.2) {
-			rb.AddTorque(transform.up * turn * spin * Time.deltaTime);
+		Vector3 angular_lateral_velocity = Vector3.Project(rb.angularVelocity, transform.up);
+		if (Mathf.Abs(turn) > 0.1f) {
+			float fractional_angular_velocity = Mathf.Pow((1.0f - angular_lateral_velocity.magnitude/4.0f), 2);
+			rb.AddTorque(transform.up * turn * spin * Time.deltaTime * fractional_angular_velocity);
 		}
 		else {
-			Vector3 angular_lateral_velocity = Vector3.Project(rb.angularVelocity, transform.up);
 			float angular_friction = Mathf.Min(angular_lateral_velocity.magnitude * Mathf.Rad2Deg, handling * Time.deltaTime);
 			rb.AddTorque(-angular_lateral_velocity.normalized * angular_friction);
 		}

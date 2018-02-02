@@ -17,12 +17,17 @@ public class Levitator : MonoBehaviour {
 	void FixedUpdate () {
 		float fall_speed = -Vector3.Project(rb.velocity, Physics.gravity).magnitude;
 		float height = transform.position.y;
-		if (fall_speed <= -max_fall_speed || height <= hover_height) {
+		bool at_hover_distance = this.isAtOrBelowHoverDistance();
+		if (fall_speed <= -max_fall_speed || at_hover_distance) {
 			this.AddAntiGravityForce();
 		}
-		if (fall_speed < 0 && height <= hover_height) {
+		if (fall_speed < 0 && at_hover_distance) {
 			rb.AddForce(-Vector3.Project(rb.velocity, Physics.gravity), ForceMode.VelocityChange);
 		}
+	}
+
+	bool isAtOrBelowHoverDistance () {
+		return Physics.Raycast(transform.position, -transform.up, hover_height);
 	}
 
 	void AddAntiGravityForce() {

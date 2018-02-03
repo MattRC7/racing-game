@@ -26,10 +26,8 @@ public class Levitator : MonoBehaviour {
 		}
 
 		float current_roll = transform.rotation.z;
-		Debug.Log("roll="+current_roll);
-		if (Mathf.Abs(current_roll) > 0.01f*Mathf.Deg2Rad) {
+		if (Mathf.Abs(current_roll) > 0.01f) {
 			float current_roll_speed = Vector3.Project(rb.angularVelocity, transform.forward).magnitude;
-			Debug.Log("roll_speed="+current_roll_speed);
 			if (current_roll > 0 && current_roll_speed > -1) {
 				rb.AddTorque(-transform.forward);
 			}
@@ -39,6 +37,20 @@ public class Levitator : MonoBehaviour {
 		}
 		else {
 			rb.AddTorque(-Vector3.Project(rb.angularVelocity, transform.forward), ForceMode.VelocityChange);
+		}
+
+		float current_pitch = transform.rotation.x;
+		if (Mathf.Abs(current_pitch) > 0.01f) {
+			float current_pitch_speed = Vector3.Project(rb.angularVelocity, transform.right).magnitude;
+			if (current_pitch > 0 && current_pitch_speed > -1) {
+				rb.AddTorque(-transform.right);
+			}
+			else if (current_pitch < 0 && current_pitch_speed < 1) {
+				rb.AddTorque(transform.right);
+			}
+		}
+		else {
+			rb.AddTorque(-Vector3.Project(rb.angularVelocity, transform.right), ForceMode.VelocityChange);
 		}
 	}
 

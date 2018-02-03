@@ -19,11 +19,14 @@ public class PlayerRaceCamController : MonoBehaviour {
 		transform.rotation = cameraRotation();
 	}
 	
+	Vector3 effectiveForward () {
+		return Vector3.ProjectOnPlane(target.transform.forward, Vector3.up);
+	}
 	Vector3 lookDirection () {
-		return target.transform.position + target.transform.forward*forward - cameraPosition();
+		return target.transform.position + effectiveForward()*forward - cameraPosition();
 	}
 	Vector3 cameraPosition () {
-		return target.transform.position - target.transform.forward*back + target.transform.up*height;
+		return target.transform.position - effectiveForward()*back + Vector3.up*height;
 	}
 	Quaternion cameraRotation () {
 		return Quaternion.LookRotation(lookDirection());

@@ -121,11 +121,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.05
+      value: 1.67
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -38.24
+      value: -21.03
       objectReference: {fileID: 0}
     - target: {fileID: 4977969000216848, guid: 8d95c4bab7b058149b127f71d57acfa1, type: 2}
       propertyPath: m_RootOrder
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3eb2d0e6ff22364cb7eb00264c798bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 1400
+  thrust: 800
   spin: 1500
   grip: 60
   handling: 1500
@@ -492,7 +492,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 686265150}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41, y: 31.58, z: -39.91}
+  m_LocalPosition: {x: 0.69, y: 31.58, z: -22.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1020930628}
@@ -710,6 +710,14 @@ Prefab:
     - target: {fileID: 400002, guid: 7979bfbabfd634de781ee1ac9513b9c7, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7979bfbabfd634de781ee1ac9513b9c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 7979bfbabfd634de781ee1ac9513b9c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7979bfbabfd634de781ee1ac9513b9c7, type: 3}
@@ -1089,7 +1097,7 @@ Transform:
   m_GameObject: {fileID: 1500043015}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 50, y: 1, z: 50}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1219,7 +1227,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4108017323231058, guid: 5a0f619d1745f5f4fb9bfa79e4df1c80, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.6799739
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 4108017323231058, guid: 5a0f619d1745f5f4fb9bfa79e4df1c80, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1227,7 +1235,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4108017323231058, guid: 5a0f619d1745f5f4fb9bfa79e4df1c80, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -23.515491
+      value: -4.2
       objectReference: {fileID: 0}
     - target: {fileID: 4108017323231058, guid: 5a0f619d1745f5f4fb9bfa79e4df1c80, type: 2}
       propertyPath: m_LocalRotation.x

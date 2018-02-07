@@ -10,7 +10,7 @@ public class Levitator : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		rb = GetComponent<Rigidbody>();		
+		rb = GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -29,17 +29,25 @@ public class Levitator : MonoBehaviour {
 	}
 
 	void StabilizeRotation (Vector3 rotation_vector, float current_value) {
-		if (Mathf.Abs(current_value) > 0.01f) {
-			float current_speed = Vector3.Project(rb.angularVelocity, rotation_vector).magnitude;
-			if (current_value > 0 && current_speed > -1) {
-				rb.AddTorque(-rotation_vector);
-			}
-			else if (current_value < 0 && current_speed < 1) {
-				rb.AddTorque(rotation_vector);
-			}
+		Vector3 current_velocity = Vector3.Project(rb.angularVelocity, rotation_vector);
+		Debug.Log("current value: "+current_value);
+		if (current_value == 0) {
+			Debug.Log("zeroing out velocity");
+			rb.AddTorque(-current_velocity, ForceMode.VelocityChange);
 		}
 		else {
-			rb.AddTorque(-Vector3.Project(rb.angularVelocity, rotation_vector), ForceMode.VelocityChange);
+			float current_speed = Mathf.Sign(Vector3.Dot(current_velocity, rotation_vector))*current_velocity.magnitude;
+			Debug.Log("current speed: "+current_speed);
+			bool same_speed_sign_as_value = Mathf.Sign(current_value) == Mathf.Sign(current_speed);
+
+			if (!same_speed_sign_as_value && Mathf.Abs(current_value) < Mathf.Abs(current_speed * Time.deltaTime)) {
+				Debug.Log("fine-tuning velocity");
+				rb.AddTorque(-rotation_vector*(current_speed+(current_value/Time.deltaTime)),ForceMode.VelocityChange);
+			}
+			else if (same_speed_sign_as_value || Mathf.Abs(current_speed) < 3) {
+				Debug.Log("changing velocity");
+				rb.AddTorque(-(Mathf.Sign(current_value))*rotation_vector);
+			}
 		}
 	}
 

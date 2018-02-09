@@ -19,10 +19,6 @@ public class Levitator : MonoBehaviour {
 		float current_height = this.currentDistanceAboveFloor();
 		float next_step_height = current_height + (fall_speed * Time.deltaTime);
 		float target_height_delta = hover_height - current_height;
-		Debug.Log("current_height: "+current_height);
-		Debug.Log("fall speed: "+fall_speed);
-		Debug.Log("next step height: "+next_step_height);
-		Debug.Log("target_height_delta: "+target_height_delta);
 
 		float target_speed;
 		if (target_height_delta == 0) {
@@ -37,13 +33,10 @@ public class Levitator : MonoBehaviour {
 		else {
 			target_speed = -max_fall_speed;
 		}
-		Debug.Log("target_speed: "+target_speed);
 
 		float max_accel = 3.0f;
 		float target_speed_delta = target_speed - fall_speed;
 		float next_step_speed = fall_speed + max_accel*Mathf.Sign(target_speed_delta)*Time.deltaTime;
-		Debug.Log("target_speed_delta: "+target_speed_delta);
-		Debug.Log("next step speed: "+next_step_speed);
 		if (Mathf.Sign(current_height - hover_height) != Mathf.Sign(next_step_height - hover_height)) {
 			this.AddAntiGravityForce();
 			rb.AddForce(-Physics.gravity.normalized*target_speed_delta, ForceMode.VelocityChange);
@@ -77,7 +70,7 @@ public class Levitator : MonoBehaviour {
 
 	float currentDistanceAboveFloor () {
 		RaycastHit hit;
-		Physics.Raycast(transform.position, -transform.up, out hit);
+		Physics.Raycast(transform.position, -Vector3.up, out hit);
 		return hit.distance;
 	}
 

@@ -13,15 +13,44 @@ public class Levitator : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate () {
-		float fall_speed = -Vector3.Project(rb.velocity, Physics.gravity).magnitude;
-		bool at_hover_distance = this.isAtOrBelowHoverDistance();
-		if (fall_speed <= -max_fall_speed || at_hover_distance) {
-			this.AddAntiGravityForce();
+		Vector3 fall_velocity = Vector3.Project(rb.velocity, Physics.gravity);
+		float fall_speed = -Mathf.Sign(Vector3.Dot(fall_velocity, Physics.gravity))*fall_velocity.magnitude;
+		float current_height = this.currentDistanceAboveFloor();
+		float next_step_height = current_height + (fall_speed * Time.deltaTime);
+		float target_height_delta = hover_height - current_height;
+		Debug.Log("current_height: "+current_height);
+		Debug.Log("fall speed: "+fall_speed);
+		Debug.Log("next step height: "+next_step_height);
+		Debug.Log("target_height_delta: "+target_height_delta);
+
+		float target_speed;
+		if (target_height_delta == 0) {
+			target_speed = 0;
 		}
-		if (fall_speed < 0 && at_hover_distance) {
-			rb.AddForce(-Vector3.Project(rb.velocity, Physics.gravity), ForceMode.VelocityChange);
+		else if (Mathf.Sign(current_height - hover_height) != Mathf.Sign(next_step_height - hover_height)) {
+			target_speed = target_height_delta / Time.deltaTime;
+ 		}
+		else if (target_height_delta > 0) {
+			target_speed = Physics.gravity.magnitude;
+		}
+		else {
+			target_speed = -max_fall_speed;
+		}
+		Debug.Log("target_speed: "+target_speed);
+
+		float max_accel = 3.0f;
+		float target_speed_delta = target_speed - fall_speed;
+		float next_step_speed = fall_speed + max_accel*Mathf.Sign(target_speed_delta)*Time.deltaTime;
+		Debug.Log("target_speed_delta: "+target_speed_delta);
+		Debug.Log("next step speed: "+next_step_speed);
+		if (Mathf.Sign(current_height - hover_height) != Mathf.Sign(next_step_height - hover_height)) {
+			this.AddAntiGravityForce();
+			rb.AddForce(-Physics.gravity.normalized*target_speed_delta, ForceMode.VelocityChange);
+		}
+		else if (target_speed_delta > 0) {
+			this.AddAntiGravityForce();
+			rb.AddForce(-Physics.gravity.normalized*max_accel);
 		}
 
 		this.StabilizeRotation(transform.forward, transform.rotation.z);
@@ -30,29 +59,26 @@ public class Levitator : MonoBehaviour {
 
 	void StabilizeRotation (Vector3 rotation_vector, float current_value) {
 		Vector3 current_velocity = Vector3.Project(rb.angularVelocity, rotation_vector);
-		Debug.Log("current value: "+current_value);
 		if (current_value == 0) {
-			Debug.Log("zeroing out velocity");
 			rb.AddTorque(-current_velocity, ForceMode.VelocityChange);
 		}
 		else {
 			float current_speed = Mathf.Sign(Vector3.Dot(current_velocity, rotation_vector))*current_velocity.magnitude;
-			Debug.Log("current speed: "+current_speed);
 			bool same_speed_sign_as_value = Mathf.Sign(current_value) == Mathf.Sign(current_speed);
 
 			if (!same_speed_sign_as_value && Mathf.Abs(current_value) < Mathf.Abs(current_speed * Time.deltaTime)) {
-				Debug.Log("fine-tuning velocity");
 				rb.AddTorque(-rotation_vector*(current_speed+(current_value/Time.deltaTime)),ForceMode.VelocityChange);
 			}
 			else if (same_speed_sign_as_value || Mathf.Abs(current_speed) < 3) {
-				Debug.Log("changing velocity");
-				rb.AddTorque(-(Mathf.Sign(current_value))*rotation_vector);
+				rb.AddTorque(-(Mathf.Sign(current_value))*3*rotation_vector);
 			}
 		}
 	}
 
-	bool isAtOrBelowHoverDistance () {
-		return Physics.Raycast(transform.position, -transform.up, hover_height);
+	float currentDistanceAboveFloor () {
+		RaycastHit hit;
+		Physics.Raycast(transform.position, -transform.up, out hit);
+		return hit.distance;
 	}
 
 	void AddAntiGravityForce() {

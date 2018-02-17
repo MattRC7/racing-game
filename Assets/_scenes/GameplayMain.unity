@@ -468,8 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a1d14b1836f940dc91aa825059e07a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_fall_speed: 40
-  hover_height: 5
+  max_fall_speed: 9
+  hover_height: 3
 --- !u!54 &686265155
 Rigidbody:
   m_ObjectHideFlags: 0

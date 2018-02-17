@@ -14,37 +14,24 @@ public class Levitator : MonoBehaviour {
 	}
 	
 	void FixedUpdate () {
-		Vector3 fall_velocity = Vector3.Project(rb.velocity, Physics.gravity);
-		float fall_speed = -Mathf.Sign(Vector3.Dot(fall_velocity, Physics.gravity))*fall_velocity.magnitude;
-		float current_height = this.currentDistanceAboveFloor();
-		float next_step_height = current_height + (fall_speed * Time.deltaTime);
-		float target_height_delta = hover_height - current_height;
+		Vector3 target_point = this.floorPoint() + -Physics.gravity.normalized*hover_height;
+		Vector3 point_delta = target_point - transform.position;
 
-		float target_speed;
-		if (target_height_delta == 0) {
-			target_speed = 0;
-		}
-		else if (Mathf.Sign(current_height - hover_height) != Mathf.Sign(next_step_height - hover_height)) {
-			target_speed = target_height_delta / Time.deltaTime;
- 		}
-		else if (target_height_delta > 0) {
-			target_speed = Physics.gravity.magnitude;
-		}
-		else {
-			target_speed = -max_fall_speed;
-		}
+		float max_speed = Vector3.Dot(point_delta, Physics.gravity) > 0 ? max_fall_speed : 15.0f;
+		float target_speed = point_delta.magnitude < max_speed * Time.deltaTime
+			? 0.5f * point_delta.magnitude / Time.deltaTime
+			: max_speed;
+		ForceMode mode = target_speed > 0 && target_speed < max_speed
+			? ForceMode.VelocityChange
+			: ForceMode.Acceleration;
 
-		float max_accel = 3.0f;
-		float target_speed_delta = target_speed - fall_speed;
-		float next_step_speed = fall_speed + max_accel*Mathf.Sign(target_speed_delta)*Time.deltaTime;
-		if (Mathf.Sign(current_height - hover_height) != Mathf.Sign(next_step_height - hover_height)) {
-			this.AddAntiGravityForce();
-			rb.AddForce(-Physics.gravity.normalized*target_speed_delta, ForceMode.VelocityChange);
-		}
-		else if (target_speed_delta > 0) {
-			this.AddAntiGravityForce();
-			rb.AddForce(-Physics.gravity.normalized*max_accel);
-		}
+		Vector3 target_velocity = point_delta.normalized*target_speed;
+		Vector3 current_velocity = Vector3.Project(rb.velocity, -Physics.gravity);
+		Vector3 velocity_delta = target_velocity - current_velocity;
+
+		Vector3	total_acceleration = velocity_delta - Physics.gravity*(mode == ForceMode.VelocityChange ? Time.deltaTime : 1);
+
+		rb.AddForce(total_acceleration, mode);
 
 		this.StabilizeRotation(transform.forward, transform.rotation.z);
 		this.StabilizeRotation(transform.right, transform.rotation.x);
@@ -68,11 +55,16 @@ public class Levitator : MonoBehaviour {
 		}
 	}
 
-	float currentDistanceAboveFloor () {
+	Vector3 floorPoint () {
 		RaycastHit hit;
 		Physics.Raycast(transform.position, -Vector3.up, out hit);
-		return hit.distance;
+		return hit.point;
 	}
+	// float currentDistanceAboveFloor () {
+	// 	RaycastHit hit;
+	// 	Physics.Raycast(transform.position, -Vector3.up, out hit);
+	// 	return hit.distance;
+	// }
 
 	void AddAntiGravityForce() {
 		rb.AddForce(-Physics.gravity);

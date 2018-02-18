@@ -36,8 +36,6 @@ public class Levitator : MonoBehaviour {
 		Vector3 current_rotation = transform.up;
 		Vector3 target_rotation = Vector3.up;
 		Vector3 rotation_plane = Vector3.Cross(current_rotation, target_rotation).normalized;
-		Debug.DrawRay(transform.position, rotation_plane.normalized*5, Color.red);
-		Debug.DrawRay(transform.position, rb.angularVelocity.normalized*5, Color.blue);
 
 		Vector3 current_angular_velocity = rb.angularVelocity;
 		Vector3 target_angular_velocity = rotation_plane*Mathf.PI;

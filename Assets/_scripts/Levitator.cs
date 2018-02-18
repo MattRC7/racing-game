@@ -33,27 +33,39 @@ public class Levitator : MonoBehaviour {
 
 		rb.AddForce(total_acceleration, mode);
 
-		this.StabilizeRotation(transform.forward, transform.rotation.z);
-		this.StabilizeRotation(transform.right, transform.rotation.x);
+		Vector3 current_rotation = transform.up;
+		Vector3 target_rotation = Vector3.up;
+		Vector3 rotation_plane = Vector3.Cross(current_rotation, target_rotation).normalized; // could be positive or negative
+		Debug.DrawRay(transform.position, rotation_plane.normalized*5, Color.red);
+		Debug.DrawRay(transform.position, rb.angularVelocity.normalized*5, Color.blue);
+
+		Vector3 current_angular_velocity = Vector3.Project(rb.angularVelocity, rotation_plane);
+		Vector3 target_angular_velocity = rotation_plane*Mathf.PI;
+		Vector3 angular_velocity_delta = target_angular_velocity - current_angular_velocity;
+
+		rb.AddTorque(angular_velocity_delta, ForceMode.Acceleration);
+
+		// this.StabilizeRotation(transform.forward, transform.rotation.z);
+		// this.StabilizeRotation(transform.right, transform.rotation.x);
 	}
 
-	void StabilizeRotation (Vector3 rotation_vector, float current_value) {
-		Vector3 current_velocity = Vector3.Project(rb.angularVelocity, rotation_vector);
-		if (current_value == 0) {
-			rb.AddTorque(-current_velocity, ForceMode.VelocityChange);
-		}
-		else {
-			float current_speed = Mathf.Sign(Vector3.Dot(current_velocity, rotation_vector))*current_velocity.magnitude;
-			bool same_speed_sign_as_value = Mathf.Sign(current_value) == Mathf.Sign(current_speed);
+	// void StabilizeRotation (Vector3 rotation_vector, float current_value) {
+	// 	Vector3 current_velocity = Vector3.Project(rb.angularVelocity, rotation_vector);
+	// 	if (current_value == 0) {
+	// 		rb.AddTorque(-current_velocity, ForceMode.VelocityChange);
+	// 	}
+	// 	else {
+	// 		float current_speed = Mathf.Sign(Vector3.Dot(current_velocity, rotation_vector))*current_velocity.magnitude;
+	// 		bool same_speed_sign_as_value = Mathf.Sign(current_value) == Mathf.Sign(current_speed);
 
-			if (!same_speed_sign_as_value && Mathf.Abs(current_value) < Mathf.Abs(current_speed * Time.deltaTime)) {
-				rb.AddTorque(-rotation_vector*(current_speed+(current_value/Time.deltaTime)),ForceMode.VelocityChange);
-			}
-			else if (same_speed_sign_as_value || Mathf.Abs(current_speed) < 3) {
-				rb.AddTorque(-(Mathf.Sign(current_value))*3*rotation_vector);
-			}
-		}
-	}
+	// 		if (!same_speed_sign_as_value && Mathf.Abs(current_value) < Mathf.Abs(current_speed * Time.deltaTime)) {
+	// 			rb.AddTorque(-rotation_vector*(current_speed+(current_value/Time.deltaTime)),ForceMode.VelocityChange);
+	// 		}
+	// 		else if (same_speed_sign_as_value || Mathf.Abs(current_speed) < 3) {
+	// 			rb.AddTorque(-(Mathf.Sign(current_value))*3*rotation_vector);
+	// 		}
+	// 	}
+	// }
 
 	Vector3 floorPoint () {
 		RaycastHit hit;

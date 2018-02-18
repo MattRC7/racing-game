@@ -60,11 +60,6 @@ public class Levitator : MonoBehaviour {
 		Physics.Raycast(transform.position, -Vector3.up, out hit);
 		return hit.point;
 	}
-	// float currentDistanceAboveFloor () {
-	// 	RaycastHit hit;
-	// 	Physics.Raycast(transform.position, -Vector3.up, out hit);
-	// 	return hit.distance;
-	// }
 
 	void AddAntiGravityForce() {
 		rb.AddForce(-Physics.gravity);

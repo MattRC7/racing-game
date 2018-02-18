@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   max_fall_speed: 9
-  hover_height: 3
+  hover_height: 4.5
 --- !u!54 &686265155
 Rigidbody:
   m_ObjectHideFlags: 0

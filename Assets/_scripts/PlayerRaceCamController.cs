@@ -10,11 +10,11 @@ public class PlayerRaceCamController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
+		if (!target) return;
 		transform.position = cameraPosition();
 		transform.rotation = cameraRotation();
 	}

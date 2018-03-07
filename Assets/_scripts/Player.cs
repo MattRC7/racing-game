@@ -11,13 +11,15 @@ public class Player : MonoBehaviour {
 
 	public void addCredits(int count) {
 		credits += count;
-		countText.text = "Currency: " + credits.ToString();
+		if (countText)
+			countText.text = "Currency: " + credits.ToString();
 	}
 
 	// Use this for initialization
 	void Start () {
 		credits = 0;
-		countText.text = "Currency: " + credits.ToString();
+		if (countText)
+			countText.text = "Currency: " + credits.ToString();
 	}
 	
 	// Update is called once per frame

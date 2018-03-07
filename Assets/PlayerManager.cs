@@ -10,18 +10,24 @@ public class PlayerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Instantiate(player_component, new Vector3(3, 4, 3), Quaternion.identity);
+		AddPlayer(1, new Vector3(4,4,4));
 	}
 
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.Alpha2)) {
-			Instantiate(player_component, new Vector3(3, 4, -3), Quaternion.identity);
+			AddPlayer(2, new Vector3(4, 4, -4));
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha3)) {
-			Instantiate(player_component, new Vector3(-3, 4, 3), Quaternion.identity);
+			AddPlayer(3, new Vector3(-4, 4, 4));
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha4)) {
-			Instantiate(player_component, new Vector3(-3, 4, -3), Quaternion.identity);
+			AddPlayer(4, new Vector3(-4, 4, -4));
+		}
+	}
+
+	void AddPlayer (int number, Vector3 position) {
+		if (number >= 1 && number <= 4 && !players[number - 1]) {
+			players[number - 1] = Instantiate(player_component, position, Quaternion.identity);
 		}
 	}
 }

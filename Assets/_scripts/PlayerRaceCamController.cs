@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerRaceCamController : MonoBehaviour {
-	public GameObject target;
+	public Player target;
 	public float height;
 	public float back;
 	public float forward;

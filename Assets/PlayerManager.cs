@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour {
 
 	public Player player_component;
+	public PlayerRaceCamController camera_component;
 
 	private Player[] players = new Player[4];
+	private PlayerRaceCamController[] cameras = new PlayerRaceCamController[4];
 
 	// Use this for initialization
 	void Start () {
@@ -39,12 +41,15 @@ public class PlayerManager : MonoBehaviour {
 	void AddPlayer (int number, Vector3 position) {
 		if (number >= 1 && number <= 4 && !players[number - 1]) {
 			players[number - 1] = Instantiate(player_component, position, Quaternion.identity).GetComponent<Player>();
+			cameras[number - 1] = Instantiate(camera_component, Vector3.zero, Quaternion.identity).GetComponent<PlayerRaceCamController>();
+			cameras[number - 1].target = players[number - 1];
 		}
 	}
 
 	void RemovePlayer (int number) {
 		if (number >= 1 && number <= 4 && players[number - 1]) {
 			Destroy(players[number - 1].gameObject);
+			players[number - 1] = null;
 		}
 	}
 }
